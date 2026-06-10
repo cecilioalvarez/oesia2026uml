@@ -5,12 +5,14 @@ public class Libro {
     private String titulo;
     private String autor;
     private int paginas;
+    private double precio;
 
-    public Libro(String isbn, String titulo, String autor, int paginas) {
+    public Libro(String isbn, String titulo, String autor, int paginas, double precio) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.autor = autor;
         this.paginas = paginas;
+        this.precio = precio;
     }
 
     public String getIsbn() {
@@ -45,6 +47,22 @@ public class Libro {
         this.paginas = paginas;
     }
 
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public double calcularIva() {
+        return precio * 0.21;
+    }
+
+    public double calcularPrecioConIva() {
+        return precio + calcularIva();
+    }
+
     @Override
     public String toString() {
         return "Libro{" +
@@ -52,6 +70,7 @@ public class Libro {
                 ", titulo='" + titulo + '\'' +
                 ", autor='" + autor + '\'' +
                 ", paginas=" + paginas +
+                ", precio=" + precio +
                 '}';
     }
 }

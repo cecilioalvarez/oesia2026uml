@@ -82,7 +82,16 @@ public class App {
             return;
         }
 
-        Libro libro = new Libro(isbn, titulo, autor, paginas);
+        System.out.print("Precio: ");
+        double precio;
+        try {
+            precio = Double.parseDouble(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Precio inválido.");
+            return;
+        }
+
+        Libro libro = new Libro(isbn, titulo, autor, paginas, precio);
         repositorio.guardar(libro);
         System.out.println("✓ Libro guardado exitosamente.");
     }
@@ -132,6 +141,16 @@ public class App {
                 libroActual.setPaginas(Integer.parseInt(paginasStr));
             } catch (NumberFormatException e) {
                 System.out.println("Número inválido, se mantiene el valor anterior.");
+            }
+        }
+
+        System.out.print("Nuevo precio (Enter para mantener): ");
+        String precioStr = scanner.nextLine();
+        if (!precioStr.isEmpty()) {
+            try {
+                libroActual.setPrecio(Double.parseDouble(precioStr));
+            } catch (NumberFormatException e) {
+                System.out.println("Precio inválido, se mantiene el valor anterior.");
             }
         }
 
