@@ -1,5 +1,7 @@
 package es.oesia.dominio;
 
+import es.oesia.utilidades.CalculosFinancieros;
+
 public class Libro {
     private String isbn;
     private String titulo;
@@ -56,11 +58,11 @@ public class Libro {
     }
 
     public double calcularIva() {
-        return precio * 0.21;
+        return CalculosFinancieros.calcularIva(precio);
     }
 
     public double calcularPrecioConIva() {
-        return precio + calcularIva();
+        return CalculosFinancieros.calcularPrecioConIva(precio);
     }
 
     @Override
