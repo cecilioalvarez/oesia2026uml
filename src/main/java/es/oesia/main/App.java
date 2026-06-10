@@ -3,6 +3,7 @@ package es.oesia.main;
 import es.oesia.dominio.Libro;
 import es.oesia.repositorios.LibroRepository;
 import es.oesia.repositorios.LibroRepositoryImpl;
+import es.oesia.formateadores.FormateadorLibro;
 import java.util.Scanner;
 import java.util.Optional;
 
@@ -103,7 +104,7 @@ public class App {
         if (libros.isEmpty()) {
             System.out.println("No hay libros registrados.");
         } else {
-            libros.forEach(System.out::println);
+            libros.forEach(libro -> System.out.print(FormateadorLibro.formatearLibro(libro)));
         }
     }
 
