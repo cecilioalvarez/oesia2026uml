@@ -1,5 +1,8 @@
 package es.oesia;
 
+import es.oesia.dominio.Libro;
+import es.oesia.repositorios.LibroRepository;
+import es.oesia.repositorios.LibroRepositoryImpl;
 import java.util.Scanner;
 import java.util.Optional;
 

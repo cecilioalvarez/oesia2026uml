@@ -1,4 +1,4 @@
-package es.oesia;
+package es.oesia.repositorios;
 
 import es.oesia.dominio.Libro;
 import java.util.List;
