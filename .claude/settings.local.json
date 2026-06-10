@@ -3,7 +3,14 @@
     "allow": [
       "Bash(git commit -m ' *)",
       "Bash(mvn clean *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git push *)",
+      "Bash(New-Item *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\cecilio\\\\Desktop\\\\umlclaude\\\\.claude\\\\worktrees\\\\agent-aaf2732cf45f33ab9\" -Recurse -Force)",
+      "Bash(Select-Object -First 50)",
+      "Bash(Format-List FullName)",
+      "Bash(mvn exec:java -Dexec.mainClass=\"es.oesia.main.App\")",
+      "Bash(mvn install *)"
     ]
   }
 }
