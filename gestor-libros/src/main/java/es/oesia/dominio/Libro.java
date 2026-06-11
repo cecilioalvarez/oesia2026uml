@@ -1,6 +1,8 @@
 package es.oesia.dominio;
 
 import es.oesia.utilidades.CalculosFinancieros;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Libro {
     private String isbn;
@@ -8,6 +10,7 @@ public class Libro {
     private String autor;
     private int paginas;
     private double precio;
+    private List<Ejemplar> ejemplares;
 
     public Libro(String isbn, String titulo, String autor, int paginas, double precio) {
         this.isbn = isbn;
@@ -15,6 +18,7 @@ public class Libro {
         this.autor = autor;
         this.paginas = paginas;
         this.precio = precio;
+        this.ejemplares = new ArrayList<>();
     }
 
     public String getIsbn() {
@@ -63,6 +67,26 @@ public class Libro {
 
     public double calcularPrecioConIva() {
         return CalculosFinancieros.calcularPrecioConIva(precio);
+    }
+
+    public List<Ejemplar> getEjemplares() {
+        return ejemplares;
+    }
+
+    public void setEjemplares(List<Ejemplar> ejemplares) {
+        this.ejemplares = ejemplares;
+    }
+
+    public void agregarEjemplar(Ejemplar ejemplar) {
+        this.ejemplares.add(ejemplar);
+    }
+
+    public void eliminarEjemplar(Ejemplar ejemplar) {
+        this.ejemplares.remove(ejemplar);
+    }
+
+    public int getTotalEjemplares() {
+        return this.ejemplares.size();
     }
 
     @Override
