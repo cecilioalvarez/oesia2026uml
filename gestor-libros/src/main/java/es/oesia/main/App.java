@@ -1,6 +1,8 @@
 package es.oesia.main;
 
 import es.oesia.dominio.Libro;
+import es.oesia.dominio.Ejemplar;
+import es.oesia.dominio.EstadoEjemplar;
 import es.oesia.repositorios.LibroRepository;
 import es.oesia.repositorios.LibroRepositoryImpl;
 import es.oesia.formateadores.FormateadorLibro;
@@ -32,6 +34,9 @@ public class App {
                     eliminarLibro();
                     break;
                 case 5:
+                    agregarEjemplarALibro();
+                    break;
+                case 6:
                     ejecutando = false;
                     System.out.println("¡Hasta luego!");
                     break;
@@ -50,7 +55,8 @@ public class App {
         System.out.println("2. Listar todos los libros");
         System.out.println("3. Actualizar libro");
         System.out.println("4. Eliminar libro");
-        System.out.println("5. Salir");
+        System.out.println("5. Dar de alta ejemplar");
+        System.out.println("6. Salir");
         System.out.print("Selecciona una opción: ");
     }
 
@@ -181,5 +187,69 @@ public class App {
         } else {
             System.out.println("Eliminación cancelada.");
         }
+    }
+
+    private static void agregarEjemplarALibro() {
+        System.out.println("\n--- Dar de alta ejemplar ---");
+        System.out.print("ISBN del libro: ");
+        String isbn = scanner.nextLine();
+
+        Optional<Libro> libroOpt = repositorio.obtener(isbn);
+
+        if (libroOpt.isEmpty()) {
+            System.out.println("Libro no encontrado.");
+            return;
+        }
+
+        Libro libro = libroOpt.get();
+        System.out.println("Libro seleccionado: " + libro.getTitulo());
+
+        System.out.print("Número de ejemplar: ");
+        int numero;
+        try {
+            numero = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Número de ejemplar inválido.");
+            return;
+        }
+
+        System.out.println("Estados disponibles:");
+        System.out.println("1. PEDIDO");
+        System.out.println("2. STOCK");
+        System.out.println("3. PRESTADO");
+        System.out.println("4. PERDIDO");
+        System.out.print("Selecciona el estado: ");
+
+        int estadoOpcion;
+        try {
+            estadoOpcion = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Opción de estado inválida.");
+            return;
+        }
+
+        EstadoEjemplar estado;
+        switch (estadoOpcion) {
+            case 1:
+                estado = EstadoEjemplar.PEDIDO;
+                break;
+            case 2:
+                estado = EstadoEjemplar.STOCK;
+                break;
+            case 3:
+                estado = EstadoEjemplar.PRESTADO;
+                break;
+            case 4:
+                estado = EstadoEjemplar.PERDIDO;
+                break;
+            default:
+                System.out.println("Estado no válido.");
+                return;
+        }
+
+        Ejemplar ejemplar = new Ejemplar(numero, estado, libro);
+        libro.agregarEjemplar(ejemplar);
+        repositorio.actualizar(libro);
+        System.out.println("✓ Ejemplar dado de alta exitosamente.");
     }
 }
